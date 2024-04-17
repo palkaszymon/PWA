@@ -31,8 +31,3 @@ body {
 button:hover {
     background-color: #0056b3;
 }
-
-#map {
-    height: 400px;
-    width: 100%;
-}
