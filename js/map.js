@@ -1,34 +1,21 @@
-var map;
-
-document.addEventListener('DOMContentLoaded', function() {
-    initializeMap();
-    getLocation();
-});
-
-function initializeMap() {
-    map = L.map('map').setView([51.505, -0.09], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-}
-
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        navigator.geolocation.getCurrentPosition(showMap);
     } else {
         alert("Geolocation is not supported by this browser.");
     }
 }
 
-function showPosition(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    map.setView([latitude, longitude], 13);
-    L.marker([latitude, longitude]).addTo(map)
-        .bindPopup('You are here').openPopup();
-}
+function showMap(position) {
+    var mapOptions = {
+        center: [position.coords.latitude, position.coords.longitude],
+        zoom: 15
+    }
+    var map = new L.map('map', mapOptions);
+    var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    map.addLayer(layer);
 
-function showError(error) {
-    console.log("Error")
+    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+    marker.bindPopup("You are here").openPopup();
 }
+getLocation()

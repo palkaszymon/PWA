@@ -8,9 +8,4 @@ function showScreen(screenId) {
         element.style.display = 'none';
       }
     });
-
-    if (screenId === 'mapScreen' && !window.mapInitialized) {
-        initializeMap();
-        window.mapInitialized = true;
-    }
 }
