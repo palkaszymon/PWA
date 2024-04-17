@@ -1,4 +1,9 @@
 function sendSOS() {
-    var pattern = [100, 100, 100, 300, 300, 300, 100, 100, 100, 300, 300, 300, 100, 100, 100];
-    navigator.vibrate(pattern);
+    console.log('vibrate')
+    if ("vibrate" in navigator) {
+        navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+    }
+    else {
+        alert("Vibration not supported by your browser")
+    }
 }
